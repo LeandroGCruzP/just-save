@@ -1,12 +1,16 @@
-import { MusicsLayout } from '../layout/MusicsLayout'
+import { useRouter } from 'next/router'
+import { MusicsLayout } from '../../layout/MusicsLayout'
 
-Musics.PageLayout = MusicsLayout
+MusicDetail.PageLayout = MusicsLayout
 
-export default function Musics () {
+export default function MusicDetail () {
+  const router = useRouter()
+  const { musicId } = router.query
+
   return (
     <div className='flex flex-col gap-6'>
       <div className='flex flex-col gap-3'>
-        <span className='text-primary'>DESCANSAR</span>
+        <span className='text-primary'>DESCANSAR - {musicId}</span>
         <span className='text-primary text-opacity-80'>Ministério Jovem</span>
       </div>
 
