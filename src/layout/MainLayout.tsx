@@ -14,8 +14,8 @@ export function MainLayout ({ children }: MainLayoutProps) {
         <title>Just Save</title>
       </Head>
 
-      <div className='flex flex-col items-center bg-custom-gradient py-10 gap-10 min-h-screen'>
-        <div className='w-full max-w-[1440px] flex flex-col content-between h-screen'>
+      <div className='bg-custom-gradient flex flex-col items-center min-h-screen py-10'>
+        <div className='flex flex-col w-full max-w-[1440px] content-between min-h-screen gap-10'>
           <Header />
 
           {children}
