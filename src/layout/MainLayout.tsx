@@ -14,12 +14,14 @@ export function MainLayout ({ children }: MainLayoutProps) {
         <title>Just Save</title>
       </Head>
 
-      <div className='flex flex-col bg-custom-gradient py-10 gap-10 min-h-screen'>
-        <Header />
+      <div className='flex flex-col items-center bg-custom-gradient py-10 gap-10 min-h-screen'>
+        <div className='w-full max-w-[1440px] flex flex-col content-between h-screen'>
+          <Header />
 
-        {children}
+          {children}
 
-        <Footer />
+          <Footer />
+        </div>
       </div>
     </>
   )
