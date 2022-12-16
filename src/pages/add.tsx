@@ -1,16 +1,17 @@
 import { FormEventHandler, useState } from 'react'
-import { api } from '../services/api'
+import { service } from '~/services'
+import { Share } from '~/shares'
 
 export default function Add () {
-  const [name, setName] = useState('')
-  const [compositor, setCompositor] = useState('')
-  const [lyric, setLyric] = useState('')
+  const [name, setName] = useState<string>()
+  const [compositor, setCompositor] = useState<string>()
+  const [lyric, setLyric] = useState<string>()
 
   const handleCreateMusic: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault()
 
-    if (name === '' || compositor === '' || lyric === '') {
-      console.log('ERROR: Without all registers')
+    if (typeof name === 'undefined' || typeof compositor === 'undefined' || typeof lyric === 'undefined') {
+      alert('ERROR: Without all registers')
 
       return
     }
@@ -21,40 +22,31 @@ export default function Add () {
       lyric
     }
 
-    api.post('musics', data)
+    service.api.post('musics', data)
       .then(() => {
-        setName('')
-        setCompositor('')
-        setLyric('')
+        setName(undefined)
+        setCompositor(undefined)
+        setLyric(undefined)
       })
-      .catch(err => console.log(err))
+      .catch(err => alert(err))
   }
 
   return (
     <form className='flex flex-col gap-2 p-4' onSubmit={handleCreateMusic}>
-      <input
-        type='text'
+      <Share.Input
+        placeholder='Nome'
         onChange={e => setName(e.target.value)}
-        placeholder='Name'
-        className='p-2 rounded-md'
       />
-      <input
-        type='text'
-        onChange={e => setCompositor(e.target.value)}
+      <Share.Input
         placeholder='Compositor'
-        className='p-2 rounded-md'
+        onChange={e => setCompositor(e.target.value)}
       />
-      <textarea
-        cols={1}
-        rows={10}
+      <Share.TextArea
+        placeholder='Letra completa com espaçamento entre parágrafos'
         onChange={e => setLyric(e.target.value)}
-        className='p-2 rounded-md'
-        placeholder='Lyric with spaces separated'
       />
 
-      <button className='p-2 rounded-md bg-primary text-white font-semibold' type='submit'>
-        Create
-      </button>
+      <Share.Button type='submit' label='Criar' />
     </form>
   )
 }

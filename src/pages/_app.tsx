@@ -1,6 +1,6 @@
 import { NextComponentType, NextPageContext } from 'next'
 import type { AppProps } from 'next/app'
-import { MainLayout } from '../layout/MainLayout'
+import { Layout } from '~/layouts'
 import '../styles/globals.css'
 
 type ComponentWithPageLayout = AppProps & {
@@ -11,7 +11,7 @@ type ComponentWithPageLayout = AppProps & {
 
 export default function App ({ Component, pageProps }: ComponentWithPageLayout) {
   return (
-    <MainLayout>
+    <Layout.MainLayout>
       {Component.PageLayout
         ? (
           <Component.PageLayout>
@@ -21,6 +21,6 @@ export default function App ({ Component, pageProps }: ComponentWithPageLayout) 
         : (
           <Component {...pageProps} />
           )}
-    </MainLayout>
+    </Layout.MainLayout>
   )
 }
